@@ -2,24 +2,17 @@ version: 0.2
 
 phases:
   install:
-    runtime-versions:
-      python: 3.9
     commands:
-      - echo "Installing dependencies..."
-      - pip install -r requirements.txt
-
-  pre_build: 
-    commands: 
-      - echo "Preparing for build"
-
+      - echo "Installing Python dependencies..."
+      - pip install -r requirements.txt -t .
   build:
     commands:
-      - echo "Running application tests..."
-
+      - echo "Build complete!"
   post_build:
     commands:
-      - echo "Build successful!"
-
+      - echo "Packaging application..."
+      - zip -r deploy.zip * .[^.]*
 artifacts:
   files:
-    - "**/*"
+    - deploy.zip
+
